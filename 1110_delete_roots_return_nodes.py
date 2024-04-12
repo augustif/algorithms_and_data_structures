@@ -39,31 +39,35 @@ class SolutionDFT:
 class SolutionBFT:
     def delNodes(self, root: [TreeNode], to_delete: list[int]) -> list[int]:
 
-        roots = []
+        roots = set()
         queue = deque()
-        queue.append(root)
-        roots.append(root)
+        queue.append((root, True))
+        to_delete = set(to_delete)
 
         while queue:
             
-            node = queue.popleft()
+            node, is_root = queue.popleft()
             
-            if node.left is not None:
-                queue.append(node.left)
-            if node.right is not None:
-                queue.append(node.right)
-
+            if is_root and node.val not in to_delete:
+                roots.add(node)
+                
             if node.val in to_delete:
-                if node.left is not None and node.left.val not in to_delete:
-                    roots.append(node.left)
-             
-                if node.right is not None and node.right.val not in to_delete:
-                    roots.append(node.right)
+                if node.left is not None:
+                    queue.append((node.left, True))
+                node.left = None
+                if node.right is not None:
+                    queue.append((node.right, True))
+                node.right = None
+
             else:
-                if node.left is not None and node.left.val in to_delete:
-                    node.left = None
-                if node.right is not None and node.right.val in to_delete:
-                    node.right = None
+                if node.left is not None:
+                    queue.append((node.left, False))
+                    if node.left.val in to_delete:
+                        node.left = None
+                if node.right is not None:
+                    queue.append((node.right, False))
+                    if node.right.val in to_delete:
+                        node.right = None
 
         return roots
 
