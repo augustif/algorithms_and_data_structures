@@ -126,19 +126,3 @@ Complexity Analysis
 Time Complexity: O(N) where N is the size of the queue. In the worst case, all the messages in the queue become obsolete. As a result, we need clean them up.
 Space Complexity: O(N) where N is the size of the queue. We keep the incoming messages in both the queue and set. The upper bound of the required space would be 2N, if we have no duplicate at all.
 """
-
-if __name__ == '__main__':
-    input_a = [[1, 'foo'], [3, 'foo'], [11, 'foo']]
-    # queue_a = [(11, 'foo')] #changes
-    # out_a = [True, False, True]
-
-    input_b = [[17, "foo"], [15, "bar"], [15, "bar"], [
-        18, "bar"], [18, "foo"], [28, "foo"], [29, "foo"]]
-    # queue_b = [(2, 'bar') (11, 'foo')] #changes
-    # out_b = [True, True, False, False, False, True]
-    outs = []
-    # Your Logger object will be instantiated and called as such:
-    obj = LoggerA0()
-    for timestamp, message in input_b:
-        outs.append(obj.shouldPrintMessage(timestamp, message))
-    print(outs)

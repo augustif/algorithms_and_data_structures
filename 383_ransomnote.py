@@ -30,11 +30,3 @@ class SolutionB:
             return True
         else: 
             return False
-
-
-if __name__ == '__main__':
-    ransomNote = 'aacb'
-    magazine = 'aabbc'
-    solution = SolutionB()
-    sol = solution.canConstruct(ransomNote, magazine)
-    print(sol)
